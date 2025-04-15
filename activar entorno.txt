@@ -1,0 +1,43 @@
+1. activar el entorno virtual para ejecutar el scrip desde la terminal
+.venv\Scripts\activate
+- para desactivar escribir
+deactivate
+----
+import pywhatkit as kit
+import pandas as pd
+import time
+import webbrowser
+
+# Ruta a Chrome y perfil correcto
+chrome_path = r'"C:\Program Files\Google\Chrome\Application\chrome.exe" --profile-directory="Informes Colegio Solaris" %s'
+
+# Usar esta configuración para abrir WhatsApp Web con el perfil correcto
+webbrowser.register("chrome", None, webbrowser.BackgroundBrowser(chrome_path))
+
+#C:\Program Files\Google\Chrome\Application
+
+# 📌 Cargar contactos desde el archivo CSV
+archivo_csv = "contacto.csv"  # Asegúrate de que el archivo está en la misma carpeta o coloca la ruta completa
+df = pd.read_csv(archivo_csv, sep=';')
+
+# 📌 Ruta de la imagen (ajusta la ruta según la ubicación de tu imagen)
+imagen_path = "imag.jpeg"
+# Mensaje a enviar
+# 📌 Iterar sobre cada contacto y enviar el mensaje
+for index, row in df.iterrows():
+    nombre = row["nombre"]
+    numero = str(row["telefono"])
+
+    # 📢 Personalizar el mensaje con el nombre
+    mensaje = f"""¡Hola {nombre}, atención, padres de familia!
+"""
+
+    print(f"📩 Enviando mensaje a {nombre} ({numero})...")
+    
+    # Enviar el mensaje con imagen
+    kit.sendwhats_image(numero, imagen_path, mensaje, wait_time=15)
+    
+    # ⏳ Pausa para evitar bloqueos (ajústalo según la cantidad de mensajes)
+    time.sleep(30)
+
+print("✅ Mensajes enviados correctamente.")
