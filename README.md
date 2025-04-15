@@ -59,7 +59,7 @@ Abre WhatsApp Web manualmente con tu perfil:
 powershell
 Copiar
 Editar
-start chrome --profile-directory="Informes Colegio Solaris" https://web.whatsapp.com
+start chrome --profile-directory="Escribe el usuario de Chrome" https://web.whatsapp.com
 Escaneá el QR si es necesario. No cierres esa pestaña.
 
 Luego, ejecutá el script desde tu entorno virtual.
